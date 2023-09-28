@@ -1,13 +1,13 @@
 import random
 
 
-def choice(list):
+def choose_random_word_from_list(list):
     word = random.choice(list)
     print(word)
 
 
 word_list = ["apple", "orange", "banana", "pear", "kiwi"]
-choice(word_list)
+choose_random_word_from_list(word_list)
 
 
 guess = input("enter a signle letter")
