@@ -1,4 +1,5 @@
 import random
+import re
 
 
 class Hangman:
@@ -14,9 +15,17 @@ class Hangman:
         guessed_letter = guessed_letter.lower()
 
         if guessed_letter in self.word_to_guess:
-            print(f"good guess {guessed_letter} is in the word")
+            print(f"Good guess! {guessed_letter} is in the word.")
+
+            # loop inserts the correct letter instead of underscores in word_guessed
+            for position in re.finditer(guessed_letter, self.word_to_guess):
+                self.word_guessed.insert(position, guessed_letter)
+
+            self.num_unique_ungessed_letters -= 1
         else:
-            print("bad guess")
+            self.num_lives -= 1
+            print(f"Sorry, {guessed_letter} is not in the word.")
+            print(f"You have {self.num_lives} lives left.")
 
     def ask_for_input(self):
         while True:
