@@ -8,11 +8,12 @@ class Hangman:
         self.num_lives = num_lives
         self.word_to_guess = random.choice(word_list)
         self.word_guessed = ["_" for _ in self.word_to_guess]
-        self.num_unique_ungessed_letters = len(set(self.word_to_guess))
+        self.num_unique_ungessed = len(set(self.word_to_guess))
         self.guessed_letters = []
 
-    # converts the list of letters word_guessed into a printable string
+
     def word_guessed_str(self):
+        '''converts the list of letters word_guessed into a printable string'''
         guessed_word_string = ""
         guessed_word_string = guessed_word_string.join(self.word_guessed)
         return guessed_word_string
@@ -27,7 +28,7 @@ class Hangman:
             for position in re.finditer(guessed_letter, self.word_to_guess):
                 self.word_guessed[position.start()] = guessed_letter
 
-            self.num_unique_ungessed_letters -= 1
+            self.num_unique_ungessed -= 1
         else:
             self.num_lives -= 1
             print(f"Sorry, {guessed_letter} is not in the word.")
@@ -56,7 +57,7 @@ def play_game(word_list):
             print(f"The word was {game.word_to_guess}")
             break
 
-        if game.num_unique_ungessed_letters > 0:
+        if game.num_unique_ungessed > 0:
             game.ask_for_input()
 
         else:
